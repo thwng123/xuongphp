@@ -14,8 +14,13 @@ use Nguyenvanthuong\Xuongphp\Controllers\Admin\UserController;
 //      DELETE  -> USER/ID      -> DELETE ($id)   -> XÓA BẢNG
 
 $router->before('GET|POST', '/admin/*.*', function() {
-    if (! isset($_SESSION['user'])) {
-        header('location: ' . url('login') );
+    if (!is_logged()) {
+        header('location: ' . url('auth/login') );
+        exit();
+    } 
+
+    if (!is_admin()) {
+        header('location: ' . url() );
         exit();
     }
 }); 
