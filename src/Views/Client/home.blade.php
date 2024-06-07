@@ -26,7 +26,7 @@
                     </h4>
 
                     <p class="h4">
-                        {{ $product['price'] }}
+                        {{ $product['price_regular'] }}
                     </p>
 
 
