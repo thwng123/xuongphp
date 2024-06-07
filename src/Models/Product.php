@@ -11,7 +11,7 @@ class Product extends Model
     public function all() {
         return $this->queryBuilder
         ->select(
-            'p.id', 'p.category_id', 'p.name', 'p.img_thumbnail', 'p.created_at', 'p.updated_at','p.price_regular',
+            'p.*',
             'c.name as c_name'
         )
         ->from($this->tableName, 'p')
@@ -47,8 +47,7 @@ class Product extends Model
     {
         return $this->queryBuilder
             ->select(
-                'p.id', 'p.category_id', 'p.name', 'p.img_thumbnail', 'p.created_at', 'p.updated_at','p.price_regular',
-                'p.overview', 'p.content',
+                'p.*',
                 'c.name as c_name'
             )
             ->from($this->tableName, 'p')

@@ -1,39 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.masterr')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
-    {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css/style1.css') }}"> --}}
+@section('title')
+    Reader
+@endsection
 
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('namepage')
+    Shop
+@endsection
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+@section('content')
+    @foreach ($products as $product)
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card border-0 rounded-0 text-center shadow-none overflow-hidden">
 
-<body>
-    <div class="container">
-        <div class="row">
-            <h1 class="mt-5">Welcome {{ $name }} to my website!</h1>
+                <span class="badge badge-primary">NEW</span>
+                <a href="{{ url('products/' . $product['id']) }}">
+                    <img src="{{ asset($product['img_thumbnail']) }}" alt="" height="200px"
+                        class="card-img-top rounded-0">
+                </a>
+                <div class="card-body">
+                    <h4 class="text-uppercase mb-3">
+                        <a href="{{ url('products/' . $product['id']) }}">
+                            {{ $product['name'] }}
+                        </a>
+                    </h4>
+
+                    <p class="h4">
+                        {{ $product['price'] }}
+                    </p>
+
+
+                    <a href="{{ url('cart/add') }}?quantity=1&productID={{ $product['id'] }}" class="btn btn-primary">
+                        ADD TO CART
+                    </a>
+
+
+                </div>
+
+            </div>
         </div>
-
-        <nav>
-            @if (!isset($_SESSION['user']))
-                <a class="btn btn-primary" href="{{ url('login') }}">Login</a>
-            @endif
-
-            @if (isset($_SESSION['user']))
-                <a class="btn btn-primary" href="{{ url('logout') }}">Logout</a>
-            @endif
-        </nav>
-    </div>
-
-
-    {{-- <a href="{{ url('login') }}">Login</a> --}}
-</body>
-
-</html>
+    @endforeach
+@endsection

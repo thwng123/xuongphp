@@ -15,7 +15,7 @@ use Nguyenvanthuong\Xuongphp\Controllers\Admin\UserController;
 
 $router->before('GET|POST', '/admin/*.*', function() {
     if (!is_logged()) {
-        header('location: ' . url('auth/login') );
+        header('location: ' . url('/login') );
         exit();
     } 
 

@@ -29,10 +29,18 @@ class LoginController extends Controller
                 throw new \Exception('Khong ton tai email' . $_POST['email']);
             }
             $flag = password_verify($_POST['password'],$user['password']);
-            if($flag){
+            if ($flag) {
 
                 $_SESSION['user'] = $user;
-                header('Location: ' . url('admin/'));
+
+                unset($_SESSION['cart']);
+
+                if ($user['type'] == 'admin') {
+                    header('Location: ' . url('admin/') );
+                    exit;
+                }
+
+                header('Location: ' . url() );
                 exit;
             }
             throw new \Exception('Password khong dung');
@@ -45,6 +53,7 @@ class LoginController extends Controller
     }
 
     public function logout() {
+        unset($_SESSION['cart-' . $_SESSION['user']['id'] ]);
         unset($_SESSION['user']);
 
         header('Location: ' . url() );

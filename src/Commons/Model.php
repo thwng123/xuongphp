@@ -27,6 +27,12 @@ class Model
         $this->queryBuilder = $this->conn->createQueryBuilder();
     }
 
+    public function getConnection()
+    {
+        return $this->conn;
+    }
+
+
     // CRUD
     public function all()
     {
