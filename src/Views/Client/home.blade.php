@@ -40,4 +40,27 @@
             </div>
         </div>
     @endforeach
+    <nav>
+        <ul class="pagination">
+            <li class="page-item {{ $page == 1 ? 'disabled' : '' }}">
+                <a class="page-link " href="{{ url('?page=' . $page - 1) }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            @for ($i = 1; $i <= $totalPage; $i++)
+                <li class="page-item {{ $i == $page ? 'avtive' : '' }}">
+                    <a class="page-link" href="{{ url('?page=' . $i) }}" >
+                      {{ $i }}
+                    </a>
+                </li>
+            @endfor
+
+            <li class="page-item {{ $page ==  $totalPage ? 'disabled' : ''}}">
+                    <a class="page-link " href="{{ url('?page=' . $page + 1) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+        </ul>
+    </nav>
 @endsection

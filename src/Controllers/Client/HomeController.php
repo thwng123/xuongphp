@@ -19,14 +19,21 @@ class HomeController extends Controller
     }
     public function index(){
 
-        $name = "DUCTV44";
+        // $name = "DUCTV44";
 
-        $products = $this->product->all();
+        // $products = $this->product->all();
 
+
+        // $this->renderViewClient('home', [
+        //     'name' => $name,
+        //     'products' => $products
+        // ]);
+        [$products , $totalPage] = $this->product->paginate($_GET['page'] ?? 1 );
 
         $this->renderViewClient('home', [
-            'name' => $name,
-            'products' => $products
+            'products' => $products,
+            'totalPage' => $totalPage,
+            'page' => $_GET['page'] ?? 1,
         ]);
 
         
